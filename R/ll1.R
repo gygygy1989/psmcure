@@ -6,7 +6,7 @@
 #' @param Z The covariates included in the cure link function.
 #' @param w unobserved cure status indicator.
 #' @param link The type of cure rate link function, including "logit","probit", and "cloglog".
-#'
+#' @importFrom stats pnorm
 #' @return None
 #'
 #'

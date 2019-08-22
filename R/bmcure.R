@@ -11,6 +11,7 @@
 #' @param na.action The action to deal with NA/missing values.
 #' @param method The method to estimate parameters, including "semiparametric" and "parametric".
 #' @param dis If "parametric" is specified for method, then dis must be provided, such as "exp","weibull","llogis","gamma","gompertz","lnorm" and "gengamma".
+#' @importFrom stats na.omit model.frame model.matrix model.extract pweibull dweibull
 #' @return None
 #'
 #'

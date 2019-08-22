@@ -7,6 +7,7 @@
 #' @param xlab The x-axis label.
 #' @param ylab The y-axis label.
 #' @param \dots Other plot arguments.
+#' @importFrom graphics plot matplot
 #' @return None
 #'
 #'

@@ -13,7 +13,7 @@
 #' @param emmax The maximum iteration is 100.
 #' @param eps The stopping criteria for convergence is 1e-7.
 #' @param dis The parametric distribution such as "exp","weibull","llogis","gamma","gompertz","lnorm" and "gengamma".
-#'
+#' @importFrom stats glm coef pnorm optim
 #' @importFrom flexsurv flexsurvreg
 #' @importFrom numDeriv grad
 #' @importFrom MASS ginv
@@ -35,7 +35,7 @@ emp<-function(Time,Status,age,Z,X,mort.s,mort.h,link="logit",emmax=100,eps=1e-7,
   if(dis=="exp") ndpar=1
   if(dis=="gengamma") ndpar=3
 
-  betafit=flexsurvreg(Surv(Time,Status)~X,dis=dis)
+  betafit=flexsurvreg(Surv(Time,Status)~X,dist=dis)
   dpar=betafit$res[,1][1:ndpar]
   lgdpar<-betafit$res.t[,1][1:ndpar]   #log of part of parameters
   beta<-coef(betafit)[-c(1:ndpar)]

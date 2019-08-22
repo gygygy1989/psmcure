@@ -13,6 +13,7 @@
 #' @param emmax The maximum iteration is 100.
 #' @param eps The stopping criteria for convergence is 1e-7.
 #' @importFrom survival coxph Surv
+#' @importFrom stats glm pnorm optim optimise quasibinomial
 #' @return None
 #'
 #'

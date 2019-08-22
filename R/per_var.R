@@ -16,7 +16,6 @@
 #'
 #' @importFrom Matrix nearPD
 #' @importFrom numDeriv grad
-#'
 #' @return None
 #'
 #'
