@@ -14,6 +14,9 @@
 #' @param mort.h background hazard rate from life table.
 #' @param mort.s background survival rate from life table.
 #'
+#' @importFrom Matrix nearPD
+#' @importFrom numDeriv grad
+#'
 #' @return None
 #'
 #'

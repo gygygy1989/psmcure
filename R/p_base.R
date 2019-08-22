@@ -5,6 +5,8 @@
 #' @param Time Survival time from data set.
 #' @param dis The parametric distribution such as "exp","weibull","llogis","gamma","gompertz","lnorm" and "gengamma".
 #' @param dpar the parameters for different distributions.
+#' @importFrom stats pexp pweibull pgamma plnorm
+#' @importFrom flexsurv hexp hweibull pllogis hllogis hgamma pgompertz hgompertz pgengamma hgengamma hlnorm
 #' @return None
 #'
 #'

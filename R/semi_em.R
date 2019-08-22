@@ -12,7 +12,8 @@
 #' @param link The type of cure rate link function, including "logit","probit", and "cloglog".
 #' @param emmax The maximum iteration is 100.
 #' @param eps The stopping criteria for convergence is 1e-7.
-#'
+#' @importFrom stats glm optim optimise pnorm
+#' @importFrom survival coxph Surv
 #' @return None
 #'
 #'
