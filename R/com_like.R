@@ -13,7 +13,6 @@
 #' @param mort.h background hazard rate.
 #' @param mort.s background survival rate.
 #' @param ii the number of observation.
-#' @importFrom stats pnorm
 #' @return None
 #'
 #'

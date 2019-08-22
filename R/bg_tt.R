@@ -4,7 +4,6 @@
 #'
 #' @param weipar weibull parameters
 #' @param try the data set of survival time and survival probabilities
-#' @importFrom stats pweibull
 #' @return None
 #'
 #'

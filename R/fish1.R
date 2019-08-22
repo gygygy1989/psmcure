@@ -7,7 +7,6 @@
 #' @param w unobserved cure status indicator.
 #' @param link The type of cure rate link function, including "logit","probit", and "cloglog".
 #' @param ii the number of observation.
-#' @importFrom stats pnorm
 #' @return None
 #'
 #'

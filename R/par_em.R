@@ -14,7 +14,6 @@
 #' @param eps The stopping criteria for convergence is 1e-7.
 #' @param dis The parametric distribution such as "exp","weibull","llogis","gamma","gompertz","lnorm" and "gengamma".
 #'
-#' @importFrom stats glm optim optimise pnorm
 #' @importFrom flexsurv flexsurvreg
 #' @importFrom numDeriv grad
 #' @importFrom MASS ginv
