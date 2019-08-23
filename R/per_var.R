@@ -50,7 +50,7 @@ per_fun<- function(b=b,Z=Z,link=link,Status=Status,w=w,beta=beta,s=s,th=th,X=X,m
     i.func<- i.func+temp.func
   }
 
-  se.est<- sqrt(diag(nearPD(ginv(i.func))$mat))
+  se.est<- sqrt(diag(solve(i.func)))
   return(se.est)
 }
 
