@@ -16,7 +16,7 @@
 #'
 #'
 #'
-fish_func2<- function(beta,s,th,Status,X,w,mort.h,mort.s,ii){
+fish.func2<- function(beta,s,th,Status,X,w,mort.h,mort.s,ii){
   if (is.matrix(X)){
     temp2<- exp(beta%*%(X[ii,]))
   }else{
@@ -24,6 +24,9 @@ fish_func2<- function(beta,s,th,Status,X,w,mort.h,mort.s,ii){
   }
   ss<- s[ii]^temp2
   thh<- th[ii]*temp2
+  if(mort.h[ii]==Inf){
+    mort.h[ii]=1000
+  }
   ll2<- Status[ii]*w[ii]*log(thh+(1e-10))+w[ii]*log(mort.s[ii]*ss+(1e-10))+Status[ii]*(1-w[ii])*log(mort.h[ii]+(1e-10))+(1-w[ii])*log(mort.s[ii]+(1e-10))
   return(ll2)
 }

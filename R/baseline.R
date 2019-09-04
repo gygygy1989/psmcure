@@ -14,18 +14,39 @@
 #'
 #'
 #'
-surv_func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
+surv.func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
   id<- seq(1,length(Time),1)
   temp.data<- data.frame(cbind(id,Time,Status,age,X,w,mort.s,mort.h))
   sort.temp.data<- temp.data[order(temp.data$age),]
 
-  divisor=4
-  while(divisor <= length(id)){
-    if(length(id) %% divisor == 0){
+
+  seq_id<- length(id)
+  divisor<- 4
+  while(divisor<= seq_id){
+    if(length(id)%%divisor==0){
       break
     }
     divisor<- divisor+1
   }
+  if(divisor<=6){
+    sdata<- split(sort.temp.data,rep(1:(length(id)/divisor),each=divisor))
+  }else{
+    while(seq_id>=4){
+      if(seq_id %% 4==0){
+        break
+      }
+      seq_id<- seq_id-1
+    }
+
+    id_diff<- length(id)-seq_id
+    sdata<- split(sort.temp.data[(1:seq_id),],rep(1:(seq_id/divisor),each=divisor))
+    if(id_diff<3){
+      sdata<- sdata
+    }else {
+      sdata[[(seq_id/divisor)+1]]<- sort.temp.data[((seq_id+1):length(id)),]
+    }
+  }
+
 
   sdata<-split(sort.temp.data,rep(1:(nrow(sort.temp.data)/divisor),each=divisor))
   base<- list()
@@ -36,9 +57,10 @@ surv_func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
     }else{XX= sdata[[i]]$X}
 
 
-    base[[i]]<- split_base(Time=sdata[[i]]$Time,Status=sdata[[i]]$Status,
+    base[[i]]<- split.base(Time=sdata[[i]]$Time,Status=sdata[[i]]$Status,
                            X=XX,beta=beta,w=sdata[[i]]$w,
                            mort.s=sdata[[i]]$mort.s,mort.h=sdata[[i]]$mort.h)
+
     subdata[[i]]<- cbind(sdata[[i]]$id,sdata[[i]]$Time,base[[i]]$basesurv,base[[i]]$tbasehaz)
   }
 

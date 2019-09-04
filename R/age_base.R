@@ -13,7 +13,7 @@
 #'
 #'
 #'
-split_base<- function(Time,Status,X,beta,w,mort.s,mort.h){
+split.base<- function(Time,Status,X,beta,w,mort.s,mort.h){
 
   nn<- length(Time)
   death_point<-sort(unique(subset(Time,Status==1)))
@@ -31,14 +31,14 @@ split_base<- function(Time,Status,X,beta,w,mort.s,mort.h){
     tsurv=rep(1,nn)
 
     #baseline surv
-    basesurv<- tsurv/exp(log(mort.s)/drop(exp(beta%*%t(X))))
+    basesurv<- tsurv/exp(log(mort.s+(1e-10))/drop(exp(beta%*%t(X))))
   }else{
 
     for (i in 1:length(death_point)){
       event[i]<-sum(Status*(w)*as.numeric(Time==death_point[i]))
       temp=sum(as.numeric(Time>=death_point[i])*(w)*drop(exp(beta%*%t(X))))
       temp1<-event[i]
-      lambda[i]<-temp1/temp
+      lambda[i]<-temp1/(temp+(1e-10))
     }
 
 
@@ -57,7 +57,7 @@ split_base<- function(Time,Status,X,beta,w,mort.s,mort.h){
 
     tsurv<- exp(-tHhaz)
 
-    basesurv<- tsurv/exp(log(mort.s)/drop(exp(beta%*%t(X))))
+    basesurv<- tsurv/exp(log(mort.s+(1e-10))/drop(exp(beta%*%t(X))))
   }
 
   list(tsurv=tsurv,basesurv=basesurv,tbasehaz=tbasehaz)
