@@ -73,10 +73,9 @@ emback<-function(Time,Status,age,Z,X,mort.s,mort.h,link="logit",emmax=100,eps=1e
 
   #variance
   se<- per_fun(b=b,Z=Z,link=link,Status=Status,w=w,beta=beta,s=s,th=th,X=X,mort.h=mort.h,mort.s=mort.s)
-  bse<- se[1:length(b)]
-  betase<- se[(length(b)+1):(length(b)+length(beta))]
 
-  emback <- list(b=b,latencyfit=beta,Uncureprob=uncure,s=s,th=th,bse=bse,betase=betase,w=w)
+
+  emback <- list(b=b,latencyfit=beta,Uncureprob=uncure,s=s,h=th,se=se,w=w)
 }
 
 

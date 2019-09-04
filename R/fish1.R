@@ -1,6 +1,6 @@
-#' Likelihood function for cure link function in variance estimation
+#' Likelihood function for cure link function in variance estimation.
 #'
-#' Likelihood function for cure link function in variance estimation
+#' Likelihood function for cure link function in variance estimation.
 #'
 #' @param b parameters in cure link function.
 #' @param Z The covariates included in the cure link function.

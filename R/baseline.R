@@ -1,6 +1,6 @@
-#' Semiparametric baseline estimation
+#' Semiparametric baseline estimation in EM algorithm.
 #'
-#' Semiparametric baseline estimation
+#' Semiparametric baseline estimation in EM algorithm.
 #'
 #' @param Time observed survival time
 #' @param Status right censored status (1=death, 0=censored)
@@ -14,7 +14,7 @@
 #'
 #'
 #'
-surv.func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
+surv_func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
   id<- seq(1,length(Time),1)
   temp.data<- data.frame(cbind(id,Time,Status,age,X,w,mort.s,mort.h))
   sort.temp.data<- temp.data[order(temp.data$age),]
@@ -57,7 +57,7 @@ surv.func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
     }else{XX= sdata[[i]]$X}
 
 
-    base[[i]]<- split.base(Time=sdata[[i]]$Time,Status=sdata[[i]]$Status,
+    base[[i]]<- split_base(Time=sdata[[i]]$Time,Status=sdata[[i]]$Status,
                            X=XX,beta=beta,w=sdata[[i]]$w,
                            mort.s=sdata[[i]]$mort.s,mort.h=sdata[[i]]$mort.h)
 

@@ -22,7 +22,7 @@ bmcure(formula, cureform, link, data, table1, table2,
 
 \item{na.action}{The action to deal with NA/missing values.}
 
-\item{method}{The method to estimate parameters, including "semiparametric" and "parametric".}
+\item{method}{The method to estimate parameters, including "semiparametric","flexible" and "parametric".}
 
 \item{dis}{If "parametric" is specified for method, then dis must be provided, such as "exp","weibull","llogis","gamma","gompertz","lnorm" and "gengamma".}
 }

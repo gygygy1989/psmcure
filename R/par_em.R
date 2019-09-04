@@ -113,6 +113,6 @@ emp<-function(Time,Status,age,Z,X,mort.s,mort.h,link="logit",emmax=100,eps=1e-7,
   se.est<- sqrt(diag(ginv(hes.mtx)))
   ##################################
 
-  emp <- list(b=b, latencyfit=beta,dpar=dpar,Survival=s,Hazard=h,Uncureprob=uncure,tau=convergence,se=se.est,w=w)
+  emp <- list(b=b, latencyfit=beta,dpar=dpar,s=s,h=h,Uncureprob=uncure,tau=convergence,se=se.est,w=w)
 }
 

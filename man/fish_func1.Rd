@@ -2,7 +2,7 @@
 % Please edit documentation in R/fish1.R
 \name{fish_func1}
 \alias{fish_func1}
-\title{Likelihood function for cure link function in variance estimation}
+\title{Likelihood function for cure link function in variance estimation.}
 \usage{
 fish_func1(b, Z, w, link, ii)
 }
@@ -21,5 +21,5 @@ fish_func1(b, Z, w, link, ii)
 None
 }
 \description{
-Likelihood function for cure link function in variance estimation
+Likelihood function for cure link function in variance estimation.
 }

@@ -1,6 +1,6 @@
-#' Baseline estimation stratified by age
+#' Semiparametric baseline estimate stratified by age.
 #'
-#' Baseline estimation stratified by age
+#' Semiparametric baseline estimate stratified by age.
 #'
 #' @param Time observed survival time
 #' @param Status right censored status (1=death, 0=censored)
@@ -13,7 +13,7 @@
 #'
 #'
 #'
-split.base<- function(Time,Status,X,beta,w,mort.s,mort.h){
+split_base<- function(Time,Status,X,beta,w,mort.s,mort.h){
 
   nn<- length(Time)
   death_point<-sort(unique(subset(Time,Status==1)))

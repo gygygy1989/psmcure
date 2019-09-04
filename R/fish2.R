@@ -1,6 +1,6 @@
-#' Likelihood function for latency survival function in variance estimation
+#' Likelihood function for latency survival function in variance estimation.
 #'
-#' Likelihood function for latency survival function in variance estimation
+#' Likelihood function for latency survival function in variance estimation.
 #'
 #' @param beta The estimated parameters in latency survival function.
 #' @param s The estimated baseline survival rate.
@@ -16,7 +16,7 @@
 #'
 #'
 #'
-fish.func2<- function(beta,s,th,Status,X,w,mort.h,mort.s,ii){
+fish_func2<- function(beta,s,th,Status,X,w,mort.h,mort.s,ii){
   if (is.matrix(X)){
     temp2<- exp(beta%*%(X[ii,]))
   }else{

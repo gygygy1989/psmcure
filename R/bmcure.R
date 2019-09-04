@@ -9,7 +9,7 @@
 #' @param table1 US 2015 Life Table for female.
 #' @param table2 US 2015 Life Table for male.
 #' @param na.action The action to deal with NA/missing values.
-#' @param method The method to estimate parameters, including "semiparametric" and "parametric".
+#' @param method The method to estimate parameters, including "semiparametric","flexible" and "parametric".
 #' @param dis If "parametric" is specified for method, then dis must be provided, such as "exp","weibull","llogis","gamma","gompertz","lnorm" and "gengamma".
 #' @importFrom stats na.omit model.frame model.matrix model.extract pweibull dweibull
 #' @return None
@@ -78,29 +78,41 @@ bmcure<- function(formula,cureform,link,data,table1,table2,na.action=na.omit,met
   X<- X[,-1]
 
   if (method=="semiparametric"){
-  emfit<- emback(Time,Status,age,Z,X,mort.s,mort.h,link=link,emmax=100,eps=1e-7)
-  b<- emfit$b
-  cure<- unique(1-emfit$Uncureprob)
-  beta<- emfit$latencyfit
-  bse<- emfit$bse
-  betase<- emfit$betase
-  s<- emfit$s
-  th<- emfit$th
-  cure<- unique(1-emfit$Uncureprob)
-  w<- emfit$w
-}
+    emfit<- emback(Time,Status,age,Z,X,mort.s,mort.h,link=link,emmax=100,eps=1e-7)
+  }
+
+  if(method=="flexible"){
+    # initial values
+    w= Status
+    n= length(Status)
+    # initial b
+    b=glm(w~Z[,-1],family=quasibinomial(link=link))$coef
+    # initial beta
+    beta=coxph(Surv(Time,Status)~X+offset(log(w+1e-10)),method="breslow")$coef
+    ##########################
+    # select knots
+    grids=Time
+    knots<- knot.fun(Time,Status,Z,X,b,beta,w,mort.s,mort.h,link=link,emmax=100,eps=1e-10,maxk=10)
+    MI=MIspline(grids,order=3,knots) #order=2 or 3
+    Ibigs=MI[[2]]   # I spline basis evaluated at grids
+    Mbigs=MI[[1]]  # M spline basis evaluated at grids
+    mm<- nrow(Ibigs)
+    r<- rep(0.1,mm)
+
+    emfit<- flex.spline(Time,Status,Z,X,Mbigs,Ibigs,r,b,beta,w,mort.s,mort.h,link="logit",emmax=100,eps=1e-10)
+  }
   if (method=="parametric"){
     emfit<- emp(Time,Status,age,Z,X,mort.s,mort.h,link="logit",emmax=100,eps=1e-7,dis=dis)
-    b<- emfit$b
-    beta<- emfit$latencyfit
-    se<- emfit$se
-    bse<- se[1:nb]
-    betase<- se[(nb+1):(nb+nbeta)]
-    s<- emfit$Survival
-    h<- emfit$Hazard
-    cure<- unique(1-emfit$Uncureprob)
-    w<- emfit$w
   }
+  b<- emfit$b
+  beta<- emfit$latencyfit
+  se<- emfit$se
+  bse<- se[1:nb]
+  betase<- se[(nb+1):(nb+nbeta)]
+  s<- emfit$s
+  h<- emfit$h
+  cure<- unique(1-emfit$Uncureprob)
+  w<- emfit$w
 
   fit<- list()
   class(fit)<- c("bmcure")
@@ -126,7 +138,6 @@ bmcure<- function(formula,cureform,link,data,table1,table2,na.action=na.omit,met
   fit$f.mmort<- f.mmort
   #cat("done.\n")
   fit$call<- call
-
 
   printbmcure(fit)
 

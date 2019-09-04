@@ -25,7 +25,7 @@ printbmcure <-
 
 
     print(b)
-    cat(paste0("Arm 1 cure rate=",round(x$cure[1]*100,3),"%"," ; ","Arm 2 cure rate=",round(x$cure[2]*100,3),"%","\n"))
+    #cat(paste0("Arm 1 cure rate=",round(x$cure[1]*100,3),"%"," ; ","Arm 2 cure rate=",round(x$cure[2]*100,3),"%","\n"))
     cat("\n")
 
     cat("Latency Survival Model:\n")
