@@ -37,8 +37,8 @@ like.com.one<- function(est0r,link,X,Z,Mbigs,Ibigs,Status,w,mort.s,mort.h,ii){
   su<- s^exb
   hu<- h*exb
 
-  logl<- w[ii]*log(uncure[ii])+(1-w[ii])*log(1-uncure[ii])+w[ii]*Status[ii]*log(mort.h[ii]+hu[ii])+w[ii]*log(mort.s[ii])+
-    w[ii]*log(su[ii]+1e-7)+(1-w[ii])*Status[ii]*log(mort.h[ii])+(1-w[ii])*log(mort.s[ii])
+  logl<- w[ii]*log(uncure[ii]+1e-10)+(1-w[ii])*log(1-uncure[ii]+1e-10)+w[ii]*Status[ii]*log(mort.h[ii]+hu[ii]+1e-10)+w[ii]*log(mort.s[ii]+1e-10)+
+    w[ii]*log(su[ii]+1e-10)+(1-w[ii])*Status[ii]*log(mort.h[ii]+1e-10)+(1-w[ii])*log(mort.s[ii]+1e-10)
 
   return(logl)
 }

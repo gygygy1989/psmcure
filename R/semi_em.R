@@ -45,7 +45,7 @@ emback<-function(Time,Status,age,Z,X,mort.s,mort.h,link="logit",emmax=100,eps=1e
     thazard<- drop(th*exp(beta%*%t(X)))
 
     ##E step
-    w=Status*(uncure*su*thazard/((1-uncure)*mort.h+uncure*su*thazard))+(1-Status)*((uncure*su)/((1-uncure)+(uncure)*su))
+    w=Status*(uncure*su*thazard/((1-uncure)*mort.h+uncure*su*thazard+(1e-10)))+(1-Status)*((uncure*su)/((1-uncure)+(uncure)*su+(1e-10)))
     ###########
 
     ##M step
@@ -68,6 +68,7 @@ emback<-function(Time,Status,age,Z,X,mort.s,mort.h,link="logit",emmax=100,eps=1e
       beta<- update_beta
     }
     i<- i+1
+    #cat("i=",i,"conv=",convergence,"\n")
   }
   ######################################
 

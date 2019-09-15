@@ -35,8 +35,8 @@ like.com<- function(est0r,link,X,Z,Mbigs,Ibigs,Status,w,mort.s,mort.h){
   su<- s^exb
   hu<- h*exb
 
-  logl<- w*log(uncure)+(1-w)*log(1-uncure)+w*Status*log(mort.h+hu)+w*log(mort.s)+
-    w*log(su+1e-10)+(1-w)*Status*log(mort.h)+(1-w)*log(mort.s)
+  logl<- w*log(uncure)+(1-w)*log(1-uncure+1e-10)+w*Status*log(mort.h+hu+1e-10)+w*log(mort.s+1e-10)+
+    w*log(su+1e-10)+(1-w)*Status*log(mort.h+1e-10)+(1-w)*log(mort.s+1e-10)
 
   sum(logl)
 }

@@ -28,7 +28,9 @@ surv_func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
     }
     divisor<- divisor+1
   }
-  if(divisor<=6){
+
+
+  if(divisor<15){
     sdata<- split(sort.temp.data,rep(1:(length(id)/divisor),each=divisor))
   }else{
     while(seq_id>=4){
@@ -39,16 +41,19 @@ surv_func<- function(Time,Status,age,X,beta,w,mort.s,mort.h){
     }
 
     id_diff<- length(id)-seq_id
-    sdata<- split(sort.temp.data[(1:seq_id),],rep(1:(seq_id/divisor),each=divisor))
-    if(id_diff<3){
-      sdata<- sdata
-    }else {
-      sdata[[(seq_id/divisor)+1]]<- sort.temp.data[((seq_id+1):length(id)),]
+    divisor<- 4
+    while(divisor<= seq_id){
+      if(seq_id%%divisor==0){
+        break
+      }
+      divisor<- divisor+1
     }
+
+    sdata<- split(sort.temp.data[(1:seq_id),],rep(1:(seq_id/divisor),each=divisor))
+    sdata[[(seq_id/divisor)+1]]<- sort.temp.data[((seq_id+1):length(id)),]
   }
 
 
-  sdata<-split(sort.temp.data,rep(1:(nrow(sort.temp.data)/divisor),each=divisor))
   base<- list()
   subdata<-list()
   for (i in 1:length(sdata)){

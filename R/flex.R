@@ -43,8 +43,8 @@ flex.spline<- function(Time,Status,Z,X,Mbigs,Ibigs,r,b,beta,w,mort.s,mort.h,link
     hu<- h*exb
 
     ##E step
-    w=Status*(uncure*(su)*(mort.h+hu))/((1-uncure)*mort.h+uncure*(su)*(mort.h+hu))+
-      (1-Status)*(uncure*su)/((1-uncure)+(uncure*su))
+    w=Status*(uncure*(su)*(mort.h+hu))/((1-uncure)*mort.h+uncure*(su)*(mort.h+hu)+(1e-10))+
+      (1-Status)*(uncure*su)/((1-uncure)+(uncure*su)+(1e-10))
     ###########
 
     ##M step
@@ -67,23 +67,10 @@ flex.spline<- function(Time,Status,Z,X,Mbigs,Ibigs,r,b,beta,w,mort.s,mort.h,link
     #cat("i=",i,"cov=",convergence)
   }
 
-  ##### variance
-  est0= c(b,beta)
-  est0r=c(b,beta,r)
-  thessian<-diag(rep(0,length(est0r)))
-  n<-length(Time)
-  for(ii in 1: n){
-    tempg<-grad(like.com.one,x=est0r,link=link,X=X,Z=Z,Mbigs=Mbigs,Ibigs=Ibigs,Status=Status,w=w,mort.s=mort.s,mort.h=mort.h,ii=ii)
-    tempm<-tempg%*%t(tempg)
-    thessian<-thessian+tempm
-  }
-  se0r<- sqrt(diag(ginv(thessian)))
-  se0<- se0r[1:(length(b)+length(beta))]
-
   h<- as.numeric(r%*%Mbigs) #h0
   cbase<- as.numeric(r%*%Ibigs) #H0
   s<- exp(-cbase)  #s0
 
-  flex.out<- list(b=b,latencyfit=beta,r=r,se=se0,Uncureprob=uncure,w=w,conv=convergence,s=s,h=h)
+  flex.out<- list(b=b,latencyfit=beta,r=r,Uncureprob=uncure,w=w,conv=convergence,s=s,h=h)
 }
 
