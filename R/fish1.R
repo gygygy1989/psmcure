@@ -17,5 +17,5 @@ fish_func1<- function(b,Z,w,link,ii){
   if(link=="logit") {rate<- as.vector(temp1/(1+temp1)) }
   if(link=="probit"){rate<- as.vector(pnorm(log(temp1)))}
   if(link=="cloglog"){rate<- as.vector(1-exp(-temp1))}
-  ll1<- w[ii]*log(rate)+(1-w[ii])*log(1-rate)
+  ll1<- w[ii]*log(rate+1e-10)+(1-w[ii])*log(1-rate+1e-10)
 }

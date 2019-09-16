@@ -37,7 +37,7 @@ bmcure<- function(formula,cureform,link,data,table1,table2,na.action=na.omit,met
   par1<- vector()
   par2<- vector()
   for (i in 1:n){
-    if (data$sex[i]==0){ #0 is female; 1 is male
+    if (data$sex[i]==2){ #2 is female; 1 is male
       pos=which(fdata$ageseq==data$age[i])
       par1[i]=fdata$V3[pos]
       par2[i]=fdata$V4[pos]
@@ -53,7 +53,7 @@ bmcure<- function(formula,cureform,link,data,table1,table2,na.action=na.omit,met
   data$mort.h<- dweibull(data$Time+1e-10,par1,par2)/(data$mort.s)
   mmort<- mean(data$mort.s)
   m.data<- data[which(data$sex==1),]
-  f.data<- data[which(data$sex==0),]
+  f.data<- data[which(data$sex==2),] #2 is female
   m.mmort<- mean(m.data$mort.s)
   f.mmort<- mean(f.data$mort.s)
   #########################################

@@ -26,5 +26,5 @@ ll2r<- function(x,Time,Status,X,Mbigs,Ibigs,w,mort.s,mort.h){
   cbase<- as.numeric(r%*%Ibigs) #H0
   s<- exp(-cbase)  #s0
 
-  -sum(w*Status*log(mort.h+h*exb+(1e-7))-w*exb*cbase)
+  -sum(w*Status*log(mort.h+h*exb+(1e-10))-w*exb*cbase)
 }
